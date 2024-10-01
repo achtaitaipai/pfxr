@@ -1,0 +1,26 @@
+{
+  "name": "pfxr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist/index.js",
+    "dist/index.global.js",
+    "dist/index.d.ts"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tsup": "^8.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  }
+}
