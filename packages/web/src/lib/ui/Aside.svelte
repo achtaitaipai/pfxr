@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getFxFromTemplate, TEMPLATES } from 'pfxr'
-	import logo from '../../assets/logo.svg'
 	import { downloadFx } from '../download'
 	import { addToHistory, currentFx, play, updateUrl } from '../stores/history'
 	import { addToast } from '../stores/toasts'
@@ -29,7 +28,7 @@
 
 <aside>
 	<h1>
-		<img src={logo} alt="" />
+		<img src="/pfxr/logo.svg" alt="" />
 		Pfxr
 	</h1>
 	<section class="flow">
