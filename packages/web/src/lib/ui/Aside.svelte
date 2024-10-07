@@ -133,9 +133,11 @@
 
 	.history {
 		flex-grow: 1;
-		border: 1px solid var(--oc-gray-4);
+		border: 1px solid var(--oc-gray-2);
+		background-color: var(--oc-gray-1);
 		padding-block: var(--space-xs);
 		overflow-y: auto;
+		border-radius: 0.3rem;
 	}
 
 	.actions {
