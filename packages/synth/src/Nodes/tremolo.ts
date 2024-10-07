@@ -7,7 +7,7 @@ export type TremoloParams = {
 }
 
 export const createTremolo = (
-	audioContext: AudioContext | OfflineAudioContext,
+	audioContext: BaseAudioContext,
 	{ tremoloDepth, tremoloRate }: TremoloParams,
 ): SynthNode<OscillatorNode, GainNode> =>
 	createLfoNode(audioContext, tremoloDepth, tremoloRate)

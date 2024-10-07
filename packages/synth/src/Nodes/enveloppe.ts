@@ -7,7 +7,7 @@ type EnveloppeParams = {
 	decayTime: number
 }
 export const createEnveloppe = (
-	audioContext: AudioContext | OfflineAudioContext,
+	audioContext: BaseAudioContext,
 	{ attackTime, sustainTime, sustainPunch, decayTime }: EnveloppeParams,
 ): SynthNode<GainNode, GainNode> => {
 	const gainNode = audioContext.createGain()

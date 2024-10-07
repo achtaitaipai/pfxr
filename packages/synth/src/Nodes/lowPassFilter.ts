@@ -5,7 +5,7 @@ type LowpassFilterParams = {
 	lowPassResonance: number
 }
 export const createLowPassFilter = (
-	audioContext: AudioContext | OfflineAudioContext,
+	audioContext: BaseAudioContext,
 	{ lowPassCutoff, lowPassResonance }: LowpassFilterParams,
 ): SynthNode<BiquadFilterNode, BiquadFilterNode> => {
 	const filter = audioContext.createBiquadFilter()

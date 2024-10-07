@@ -7,7 +7,7 @@ export type PhaserParams = {
 }
 
 export const createPhaser = (
-	audioContext: AudioContext | OfflineAudioContext,
+	audioContext: BaseAudioContext,
 	{ phaserBaseFrequency, phaserLfoFrequency, phaserDepth }: PhaserParams,
 ): SynthNode<BiquadFilterNode, BiquadFilterNode> => {
 	const filter = audioContext.createBiquadFilter()

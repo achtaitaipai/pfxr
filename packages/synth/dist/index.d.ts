@@ -156,6 +156,14 @@ declare const FX_SETTINGS: {
         readonly type: "range";
         readonly defaultValue: 0;
     }];
+    readonly noise: [{
+        readonly name: "noiseAmount";
+        readonly min: 0;
+        readonly max: 500;
+        readonly step: 1;
+        readonly type: "range";
+        readonly defaultValue: 0;
+    }];
 };
 declare const FIELDS: ({
     readonly name: "waveForm";
@@ -307,11 +315,18 @@ declare const FIELDS: ({
     readonly step: 1;
     readonly type: "range";
     readonly defaultValue: 0;
+} | {
+    readonly name: "noiseAmount";
+    readonly min: 0;
+    readonly max: 500;
+    readonly step: 1;
+    readonly type: "range";
+    readonly defaultValue: 0;
 })[];
 
 type Fx = Record<(typeof FIELDS)[number]['name'], number>;
 
-declare const playFx: (partialFx: Partial<Fx>, audioContext: AudioContext | OfflineAudioContext, destination: AudioNode) => Promise<void>;
+declare const playFx: (partialFx: Partial<Fx>, audioContext: BaseAudioContext, destination: AudioNode) => Promise<void>;
 
 declare const getFxFromUrl: (url: URL) => Fx;
 declare const getUrlFromFx: (fx: Fx, currentUrl?: URL) => URL;
@@ -422,6 +437,7 @@ declare const TEMPLATES: {
         phaserBaseFrequency: number;
         phaserLfoFrequency: number;
         phaserDepth: number;
+        noiseAmount: number;
     };
 };
 

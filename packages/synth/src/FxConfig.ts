@@ -178,6 +178,16 @@ export const FX_SETTINGS = {
 			defaultValue: 0,
 		},
 	],
+	noise: [
+		{
+			name: 'noiseAmount',
+			min: 0,
+			max: 500,
+			step: 1,
+			type: 'range',
+			defaultValue: 0,
+		},
+	],
 } as const satisfies Parameters
 
 export const FIELDS = Object.values(FX_SETTINGS).flatMap((el) => [...el])

@@ -1,7 +1,7 @@
 import { SynthNode } from '../types'
 
 export const createLfoNode = (
-	audioContext: AudioContext | OfflineAudioContext,
+	audioContext: BaseAudioContext,
 	depth: number,
 	rate: number,
 ): SynthNode<OscillatorNode, GainNode> => {

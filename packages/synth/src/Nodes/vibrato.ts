@@ -7,7 +7,7 @@ export type VibratoParams = {
 }
 
 export const createVibrato = (
-	audioContext: AudioContext | OfflineAudioContext,
+	audioContext: BaseAudioContext,
 	{ vibratoDepth, vibratoRate }: VibratoParams,
 ): SynthNode<OscillatorNode, GainNode> =>
 	createLfoNode(audioContext, vibratoDepth, vibratoRate)

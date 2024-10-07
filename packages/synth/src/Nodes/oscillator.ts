@@ -19,7 +19,7 @@ const OSCILLATORTYPES: OscillatorType[] = [
 const MAXFREQUENCY = FX_SETTINGS.pitch[0].max
 
 export const createOscillator = (
-	audioContext: AudioContext | OfflineAudioContext,
+	audioContext: BaseAudioContext,
 	durationTime: number,
 	{
 		waveForm,
