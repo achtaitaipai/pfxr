@@ -18,10 +18,9 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"dependencies": {
-		"tsup": "^8.3.0"
-	},
+	"dependencies": {},
 	"devDependencies": {
-		"typescript": "^5.6.2"
+		"typescript": "^5.6.2",
+		"tsup": "^8.3.0"
 	}
 }
