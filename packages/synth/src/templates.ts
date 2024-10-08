@@ -125,11 +125,11 @@ export const TEMPLATES = {
 		}
 	},
 	fart: (rand) => {
-		const frequency = rand.number(10, 80)
+		const frequency = rand.number(30, 150)
 		return {
 			waveForm: 1,
-			sustainPunch: rand.number(0, 0.5),
-			sustainTime: 0.1,
+			sustainPunch: rand.number(0, 0.2),
+			sustainTime: rand.number(0.1, 0.5),
 			decayTime: rand.number(0.3, 0.5),
 			frequency,
 			pitchDelta: -frequency / 2,
@@ -141,6 +141,7 @@ export const TEMPLATES = {
 			tremoloDepth: rand.number(0.6, 1),
 			lowPassCutoff: frequency * 10,
 			lowPassResonance: 10,
+			noiseAmount: rand.number(0, 30),
 		}
 	},
 	random: (rand) => {
