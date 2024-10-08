@@ -33,10 +33,12 @@ If you prefer to use **Pfxr** directly in the browser without installing via npm
 <script>
 	const { playSound, getSoundFromTemplate, TEMPLATES } = pfxr
 
-	const audioContext = new AudioContext()
-	const sound = pfxr.getSoundFromTemplate(TEMPLATES.laser)
+	const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+	const sound = getSoundFromTemplate(TEMPLATES.laser)
 
-	pfxr.playSound(sound, audioContext, audioContext.destination)
+	playSound(sound, audioContext, audioContext.destination).then(() => {
+		console.log('Sound played!')
+	})
 </script>
 ```
 
