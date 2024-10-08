@@ -2,6 +2,46 @@
 
 Pfxr is a lightweight JavaScript library inspired by DrPetter's iconic **sfxr** sound generator. It allows developers to easily create retro-style sound effects for games and applications directly in the browser using the powerful WebAudio API.
 
+## Getting Started
+
+You can install the library in your project by running:
+
+```bash
+npm install pfxr
+```
+
+Once installed, you can import and use the library in your JavaScript or TypeScript project.
+
+```typescript
+import { playSound, getSoundFromTemplate, TEMPLATES } from 'pfxr'
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+const sound = getSoundFromTemplate(TEMPLATES.laser)
+
+playSound(sound, audioContext, audioContext.destination).then(() => {
+	console.log('Sound played!')
+})
+```
+
+### Using Pfxr via CDN
+
+If you prefer to use **Pfxr** directly in the browser without installing via npm, you can include it using a CDN.
+
+```html
+<script src="https://unpkg.com/pfxr/dist/index.global.js"></script>
+
+<script>
+	const { playSound, getSoundFromTemplate, TEMPLATES } = pfxr
+
+	const audioContext = new AudioContext()
+	const sound = pfxr.getSoundFromTemplate(TEMPLATES.laser)
+
+	pfxr.playSound(sound, audioContext, audioContext.destination)
+</script>
+```
+
+By adding the script tag, you can directly access the `pfxr` object and all its functionality, making it easy to integrate sound effects into any web project.
+
 ## `playSound`
 
 The `playSound` function plays a sound using customizable parameters. This function takes a partial set of sound parameters and outputs the resulting audio to the specified audio context.
@@ -161,6 +201,7 @@ const sound = createSoundFromTemplate(customTemplate)
 const audioContext = new AudioContext()
 playSound(sound, audioContext, audioContext.destination)
 ```
+
 <<<<<<< HEAD
 
 ## `SOUND_SETTINGS`
@@ -302,9 +343,5 @@ Here is a list of all the parameters included in the `Sound` type :
 
 ### Noise
 
-21. **noiseAmount** (`range`)
-    - Amount of noise mixed into the sound, useful for effects like explosions or wind.
-    - Range: `0` to `500`
-    - Default: `0`
-=======
->>>>>>> 110e59209cf855bc3c64226f1f8174c45aa34fd8
+21. # **noiseAmount** (`range`) - Amount of noise mixed into the sound, useful for effects like explosions or wind. - Range: `0` to `500` - Default: `0`
+    > > > > > > > 110e59209cf855bc3c64226f1f8174c45aa34fd8
