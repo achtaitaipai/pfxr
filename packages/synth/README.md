@@ -27,10 +27,17 @@ The `playSound` function plays a sound using customizable parameters. This funct
 import { playSound } from 'pfxr'
 const audioContext = new AudioContext()
 const soundSettings = {
+<<<<<<< HEAD
 	waveForm: 2,
 	frequency: 440,
 	sustainTime: 0.2,
 	decayTime: 0.5,
+=======
+ waveForm: 2,
+ frequency: 440,
+ sustainTime: 0.2,
+ decayTime: 0.5,
+>>>>>>> 110e59209cf855bc3c64226f1f8174c45aa34fd8
 }
 
 playSound(soundSettings, audioContext, audioContext.destination)
@@ -82,7 +89,11 @@ The `getSoundFromUrl` function extracts sound parameters from a provided URL and
 ```javascript
 import { playSound, getSoundFromUrl } from 'pfxr'
 const url = new URL(
+<<<<<<< HEAD
 	'https://achtaitaipai.github.io/pfxr/?fx=2,0,0.25,0,0.39,443,-443,1,0.12,12,11,10,0.61,0,0,4000,0,100,50,0,0',
+=======
+ 'https://achtaitaipai.github.io/pfxr/?fx=2,0,0.25,0,0.39,443,-443,1,0.12,12,11,10,0.61,0,0,4000,0,100,50,0,0',
+>>>>>>> 110e59209cf855bc3c64226f1f8174c45aa34fd8
 )
 const sound = getSoundFromUrl(url)
 
@@ -118,6 +129,7 @@ Here's an example of a custom template:
 ```typescript
 import { playSound, getSoundFromTemplate, type SoundTemplate } from 'pfxr'
 const customTemplate: SoundTemplate = (rand) => ({
+<<<<<<< HEAD
 	waveForm: 1,
 	frequency: rand.number(200, 800),
 	sustainTime: rand.number(0.2, 0.5),
@@ -129,6 +141,19 @@ const customTemplate: SoundTemplate = (rand) => ({
 	vibratoDepth: rand.number(0, 5),
 	lowPassCutoff: rand.number(1000, 3000),
 	lowPassResonance: rand.number(0, 10),
+=======
+ waveForm: 1,
+ frequency: rand.number(200, 800),
+ sustainTime: rand.number(0.2, 0.5),
+ decayTime: rand.number(0.3, 0.6),
+ pitchDelta: -rand.number(200, 500),
+ pitchDuration: 1,
+ pitchDelay: 0,
+ vibratoRate: rand.number(0, 10),
+ vibratoDepth: rand.number(0, 5),
+ lowPassCutoff: rand.number(1000, 3000),
+ lowPassResonance: rand.number(0, 10),
+>>>>>>> 110e59209cf855bc3c64226f1f8174c45aa34fd8
 })
 
 const sound = createSoundFromTemplate(customTemplate)
@@ -136,6 +161,7 @@ const sound = createSoundFromTemplate(customTemplate)
 const audioContext = new AudioContext()
 playSound(sound, audioContext, audioContext.destination)
 ```
+<<<<<<< HEAD
 
 ## `SOUND_SETTINGS`
 
@@ -280,3 +306,5 @@ Here is a list of all the parameters included in the `Sound` type :
     - Amount of noise mixed into the sound, useful for effects like explosions or wind.
     - Range: `0` to `500`
     - Default: `0`
+=======
+>>>>>>> 110e59209cf855bc3c64226f1f8174c45aa34fd8
