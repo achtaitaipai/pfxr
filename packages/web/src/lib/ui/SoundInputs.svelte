@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { SOUND_SETTINGS } from 'pfxr'
 	import { currentSound, play, updateUrl } from '../stores/history'
-	import { SOUND_SETTINGS, type Sound } from 'pfxr'
 	import { camelToTitle } from '../string'
 	import Radio from './Radio.svelte'
 	import Range from './Range.svelte'
