@@ -87,6 +87,43 @@ export const TEMPLATES = {
 		vibratoRate: rand.number(10, 18),
 		vibratoDepth: rand.number(50, 100),
 	}),
+	explosion: (rand) => {
+		const frequency = rand.number(200)
+		return {
+			waveForm: rand.fromArray([0, 1, 2, 3]),
+			sustainPunch: rand.number(0, 0.3),
+			sustainTime: rand.number(0.4, 1.3),
+			decayTime: rand.number(0.1, 0.5),
+			frequency,
+			pitchDelta: -frequency,
+			pitchDuration: 1,
+			pitchDelay: rand.number(0.3),
+			vibratoRate: rand.number(0, 70),
+			vibratoDepth: rand.number(0, 100),
+			tremoloRate: rand.number(0, 70),
+			tremoloDepth: rand.number(0, 1),
+			phaserDepth: rand.number(300, 1000),
+			noiseAmount: rand.number(300, 500),
+		}
+	},
+	blip: (rand) => ({
+		waveForm: rand.fromArray([0, 1, 2, 3]),
+		sustainTime: rand.number(0.02, 0.1),
+		decayTime: rand.number(0, 0.04),
+		frequency: rand.number(600, 3000),
+	}),
+	hit: (rand) => {
+		const frequency = rand.number(20, 500)
+		return {
+			waveForm: rand.fromArray([0, 1, 2, 3]),
+			sustainTime: rand.number(0.01, 0.03),
+			sustainPunch: rand.number(0.5),
+			decayTime: rand.number(0, 0.2),
+			frequency,
+			pitchDelta: rand.number(-frequency, -frequency * 0.2),
+			noiseAmount: rand.number(100),
+		}
+	},
 	fart: (rand) => {
 		const frequency = rand.number(10, 80)
 		return {
