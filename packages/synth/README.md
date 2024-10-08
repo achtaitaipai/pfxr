@@ -345,7 +345,7 @@ Here is a list of all the parameters included in the `Sound` type :
 
 ### Noise
 
-21. # **noiseAmount** (`range`)
+21. noiseAmount (`range`)
 
 - Amount of noise mixed into the sound, useful for effects like explosions or wind.
 - Range: `0` to `500` - Default: `0`
