@@ -1,9 +1,9 @@
-import { defaultFx, FIELDS } from './FxConfig'
+import { defaultSound, FIELDS } from './SoundConfig'
 import { round } from './lib/number'
 import { Random } from './lib/random'
-import type { Fx } from './types'
+import type { Sound } from './types'
 
-const roundFxValues = (fx: Partial<Fx>): Fx => {
+const roundSoundValues = (fx: Partial<Sound>): Sound => {
 	FIELDS.forEach((el) => {
 		const value = fx[el.name]
 		if (el.type === 'range' && value) {
@@ -11,13 +11,13 @@ const roundFxValues = (fx: Partial<Fx>): Fx => {
 			fx[el.name] = round(value, decimals)
 		}
 	})
-	return Object.assign({}, defaultFx, fx)
+	return Object.assign({}, defaultSound, fx)
 }
 
-export type FxTemplate = (random: Random) => Partial<Fx>
+export type SoundTemplate = (random: Random) => Partial<Sound>
 
-export const getFxFromTemplate = (template: FxTemplate, seed?: number) =>
-	roundFxValues(template(new Random(seed)))
+export const getSoundFromTemplate = (template: SoundTemplate, seed?: number) =>
+	roundSoundValues(template(new Random(seed)))
 
 export const TEMPLATES = {
 	default: () => ({}),
@@ -107,7 +107,7 @@ export const TEMPLATES = {
 		}
 	},
 	random: (rand) => {
-		const params = { ...defaultFx } satisfies Fx
+		const params = { ...defaultSound } satisfies Sound
 		for (let index = 0; index < FIELDS.length; index++) {
 			const element = FIELDS[index]
 			if (element) {
@@ -120,6 +120,6 @@ export const TEMPLATES = {
 				}
 			}
 		}
-		return params satisfies Partial<Fx>
+		return params satisfies Partial<Sound>
 	},
-} as const satisfies Record<string, FxTemplate>
+} as const satisfies Record<string, SoundTemplate>

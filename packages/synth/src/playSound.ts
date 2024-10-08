@@ -1,4 +1,4 @@
-import { defaultFx } from './FxConfig'
+import { defaultSound } from './SoundConfig'
 import { createNoise } from './Nodes/noise'
 import { createEnveloppe } from './Nodes/enveloppe'
 import { createHighPassFilter } from './Nodes/highPassFilter'
@@ -7,14 +7,14 @@ import { createOscillator } from './Nodes/oscillator'
 import { createPhaser } from './Nodes/phaser'
 import { createTremolo } from './Nodes/tremolo'
 import { createVibrato } from './Nodes/vibrato'
-import type { Fx } from './types'
+import type { Sound } from './types'
 
-export const playFx = (
-	partialFx: Partial<Fx>,
+export const playSound = (
+	partialSound: Partial<Sound>,
 	audioContext: BaseAudioContext,
 	destination: AudioNode,
 ) => {
-	const fx: Fx = Object.assign({}, defaultFx, partialFx)
+	const fx: Sound = Object.assign({}, defaultSound, partialSound)
 	const duration = fx.attackTime + fx.sustainTime + fx.decayTime
 
 	const oscillator = createOscillator(audioContext, duration, fx)

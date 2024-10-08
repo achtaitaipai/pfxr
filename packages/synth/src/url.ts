@@ -1,8 +1,8 @@
-import { defaultFx, FIELDS } from './FxConfig'
-import { Fx } from './types'
+import { defaultSound, FIELDS } from './SoundConfig'
+import { Sound } from './types'
 
-export const getFxFromUrl = (url: URL): Fx => {
-	const fx = { ...defaultFx }
+export const getSoundFromUrl = (url: URL): Sound => {
+	const fx = { ...defaultSound }
 	const q = url.searchParams.get('fx')
 	if (!q) return fx
 	const urlState = decodeURI(q).split(',')
@@ -14,7 +14,7 @@ export const getFxFromUrl = (url: URL): Fx => {
 	return fx
 }
 
-export const getUrlFromFx = (fx: Fx, currentUrl = new URL(location.href)) => {
+export const getUrlFromSound = (fx: Sound, currentUrl = new URL(location.href)) => {
 	const params = encodeURI(Object.values(fx).join(','))
 	const searchParams = currentUrl.searchParams
 	searchParams.set('fx', params)

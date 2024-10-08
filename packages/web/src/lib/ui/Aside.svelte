@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { getFxFromTemplate, TEMPLATES } from 'pfxr'
-	import { downloadFx } from '../download'
-	import { addToHistory, currentFx, play, updateUrl } from '../stores/history'
+	import { getSoundFromTemplate, TEMPLATES } from 'pfxr'
+	import { downloadSound } from '../download'
+	import { addToHistory, currentSound, play, updateUrl } from '../stores/history'
 	import { addToast } from '../stores/toasts'
 	import Button from './Button.svelte'
 	import History from './History.svelte'
@@ -9,11 +9,11 @@
 	const selectTemplate = (template: string) => {
 		if (!(template in TEMPLATES)) return
 		addToHistory(
-			getFxFromTemplate(TEMPLATES[template as keyof typeof TEMPLATES]),
+			getSoundFromTemplate(TEMPLATES[template as keyof typeof TEMPLATES]),
 			template,
 		)
-		play($currentFx)
-		updateUrl($currentFx)
+		play($currentSound)
+		updateUrl($currentSound)
 	}
 
 	const copyLink = async () => {
@@ -61,7 +61,7 @@
 			</svg>
 			Copy link</Button
 		>
-		<Button on:click={() => downloadFx($currentFx)} full>
+		<Button on:click={() => downloadSound($currentSound)} full>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"
@@ -78,7 +78,7 @@
 			</svg>
 			Download</Button
 		>
-		<Button on:click={() => play($currentFx)} solid full>
+		<Button on:click={() => play($currentSound)} solid full>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"

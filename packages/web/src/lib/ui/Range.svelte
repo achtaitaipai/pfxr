@@ -1,22 +1,22 @@
 <script lang="ts">
 	import {
-		currentFx,
+		currentSound,
 		history,
 		historyCursor,
 		play,
 		updateHistoryItemParam,
 	} from '../stores/history'
-	import { getFxFromTemplate, TEMPLATES, type Fx } from 'pfxr'
+	import { getSoundFromTemplate, TEMPLATES, type Sound } from 'pfxr'
 	import { camelToTitle } from '../string'
 	import Button from './Button.svelte'
 
-	export let name: keyof Fx
+	export let name: keyof Sound
 	export let min: number
 	export let max: number
 	export let step: number
-	const defaultFx = getFxFromTemplate(TEMPLATES.default)
+	const defaultSound = getSoundFromTemplate(TEMPLATES.default)
 
-	$: label = camelToTitle(name) + ' ' + $currentFx[name]
+	$: label = camelToTitle(name) + ' ' + $currentSound[name]
 
 	const id = crypto.randomUUID()
 
@@ -26,8 +26,8 @@
 	}
 
 	const reset = () => {
-		updateHistoryItemParam($historyCursor, name, defaultFx[name])
-		play($currentFx)
+		updateHistoryItemParam($historyCursor, name, defaultSound[name])
+		play($currentSound)
 	}
 </script>
 
@@ -58,7 +58,7 @@
 		{min}
 		{max}
 		{step}
-		value={$currentFx[name]}
+		value={$currentSound[name]}
 		on:change={handleChange}
 	/>
 </div>

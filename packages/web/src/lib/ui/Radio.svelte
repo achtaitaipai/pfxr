@@ -1,15 +1,15 @@
 <script lang="ts">
 	import {
-		currentFx,
+		currentSound,
 		history,
 		historyCursor,
 		updateHistoryItemParam,
 	} from '../stores/history'
-	import type { Fx } from 'pfxr'
+	import type { Sound } from 'pfxr'
 	import { camelToTitle } from '../string'
 
 	export let options: { label: string; value: number }[]
-	export let name: keyof Fx
+	export let name: keyof Sound
 	const handleChange = (e: Event) => {
 		const value = (e.currentTarget as HTMLInputElement).value
 		updateHistoryItemParam($historyCursor, name, Number(value))
@@ -23,7 +23,7 @@
 			type="radio"
 			{name}
 			{value}
-			checked={Number(value) === $currentFx[name]}
+			checked={Number(value) === $currentSound[name]}
 		/>
 		{camelToTitle(label)}
 	</label>

@@ -1,4 +1,4 @@
-declare const FX_SETTINGS: {
+declare const SOUND_SETTINGS: {
     readonly waveForm: [{
         readonly name: "waveForm";
         readonly defaultValue: 0;
@@ -324,12 +324,12 @@ declare const FIELDS: ({
     readonly defaultValue: 0;
 })[];
 
-type Fx = Record<(typeof FIELDS)[number]['name'], number>;
+type Sound = Record<(typeof FIELDS)[number]['name'], number>;
 
-declare const playFx: (partialFx: Partial<Fx>, audioContext: BaseAudioContext, destination: AudioNode) => Promise<void>;
+declare const playSound: (partialSound: Partial<Sound>, audioContext: BaseAudioContext, destination: AudioNode) => Promise<void>;
 
-declare const getFxFromUrl: (url: URL) => Fx;
-declare const getUrlFromFx: (fx: Fx, currentUrl?: URL) => URL;
+declare const getSoundFromUrl: (url: URL) => Sound;
+declare const getUrlFromSound: (fx: Sound, currentUrl?: URL) => URL;
 
 declare class Random {
     #private;
@@ -340,8 +340,8 @@ declare class Random {
     fromArray<T>(array: T[]): T;
 }
 
-type FxTemplate = (random: Random) => Partial<Fx>;
-declare const getFxFromTemplate: (template: FxTemplate, seed?: number) => Fx;
+type SoundTemplate = (random: Random) => Partial<Sound>;
+declare const getSoundFromTemplate: (template: SoundTemplate, seed?: number) => Sound;
 declare const TEMPLATES: {
     readonly default: () => {};
     readonly pickup: (rand: Random) => {
@@ -441,4 +441,4 @@ declare const TEMPLATES: {
     };
 };
 
-export { FIELDS, FX_SETTINGS, type Fx, type FxTemplate, TEMPLATES, getFxFromTemplate, getFxFromUrl, getUrlFromFx, playFx };
+export { FIELDS, SOUND_SETTINGS, type Sound, type SoundTemplate, TEMPLATES, getSoundFromTemplate, getSoundFromUrl, getUrlFromSound, playSound };

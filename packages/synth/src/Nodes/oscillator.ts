@@ -1,5 +1,5 @@
 import { clamp } from '../lib/number'
-import { FX_SETTINGS } from '../FxConfig'
+import { SOUND_SETTINGS } from '../SoundConfig'
 import { SynthNode } from '../types'
 
 type OscillatorParams = {
@@ -16,7 +16,7 @@ const OSCILLATORTYPES: OscillatorType[] = [
 	'square',
 	'triangle',
 ] as const
-const MAXFREQUENCY = FX_SETTINGS.pitch[0].max
+const MAXFREQUENCY = SOUND_SETTINGS.pitch[0].max
 
 export const createOscillator = (
 	audioContext: BaseAudioContext,

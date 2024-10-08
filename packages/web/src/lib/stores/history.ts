@@ -1,25 +1,25 @@
-import { getFxFromUrl, getUrlFromFx, playFx, type Fx } from 'pfxr'
+import { getSoundFromUrl, getUrlFromSound, playSound, type Sound } from 'pfxr'
 import { derived, writable } from 'svelte/store'
 
 type HistoryItem = {
 	id: string
 	name: string
-	data: Fx
+	data: Sound
 }
 
 export const history = writable<HistoryItem[]>([
-	{ id: '1', name: 'default 1', data: getFxFromUrl(new URL(location.href)) },
+	{ id: '1', name: 'default 1', data: getSoundFromUrl(new URL(location.href)) },
 ])
 
 export const historyCursor = writable<string>('1')
 
-export const currentFx = derived(
+export const currentSound = derived(
 	[historyCursor, history],
 	([$historyCursor, $history]) =>
 		$history.find((el) => el.id === $historyCursor)!.data,
 )
 
-export const addToHistory = (fx: Fx, name: string) => {
+export const addToHistory = (fx: Sound, name: string) => {
 	const id = crypto.randomUUID()
 	history.update((current) => {
 		const suffix =
@@ -57,7 +57,7 @@ export const selectHistoryItem = (id: string) => {
 
 export const updateHistoryItemParam = (
 	id: string,
-	key: keyof Fx,
+	key: keyof Sound,
 	value: number,
 ) => {
 	history.update((current) =>
@@ -71,13 +71,13 @@ export const updateHistoryItemParam = (
 
 let audioContext: AudioContext | undefined
 
-export const play = (fx: Fx) => {
+export const play = (fx: Sound) => {
 	if (!audioContext) {
 		audioContext = new AudioContext()
 	}
-	playFx(fx, audioContext, audioContext.destination)
+	playSound(fx, audioContext, audioContext.destination)
 }
 
-export const updateUrl = (fx: Fx) => {
-	window.history.pushState({}, '', getUrlFromFx(fx))
+export const updateUrl = (fx: Sound) => {
+	window.history.pushState({}, '', getUrlFromSound(fx))
 }

@@ -1,9 +1,9 @@
-import { playFx, type Fx } from 'pfxr'
+import { playSound, type Sound } from 'pfxr'
 
-export const downloadFx = async (fx: Fx) => {
+export const downloadSound = async (fx: Sound) => {
 	const duration = fx.attackTime + fx.sustainTime + fx.decayTime
 	const audioContext = new OfflineAudioContext(1, 44100 * duration, 44100)
-	playFx(fx, audioContext, audioContext.destination)
+	playSound(fx, audioContext, audioContext.destination)
 	const audioBuffer = await audioContext.startRendering()
 	const blob = exportWav(audioBuffer)
 	const url = URL.createObjectURL(blob)

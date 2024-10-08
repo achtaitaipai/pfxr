@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { currentFx, play, updateUrl } from '../stores/history'
-	import { FX_SETTINGS, type Fx } from 'pfxr'
+	import { currentSound, play, updateUrl } from '../stores/history'
+	import { SOUND_SETTINGS, type Sound } from 'pfxr'
 	import { camelToTitle } from '../string'
 	import Radio from './Radio.svelte'
 	import Range from './Range.svelte'
 
 	const handleChange = () => {
-		play($currentFx)
-		updateUrl($currentFx)
+		play($currentSound)
+		updateUrl($currentSound)
 	}
 </script>
 
 <form on:change={handleChange}>
-	{#each Object.entries(FX_SETTINGS) as [group, fields]}
+	{#each Object.entries(SOUND_SETTINGS) as [group, fields]}
 		<fieldset>
 			<h3>{camelToTitle(group)}</h3>
 			<div class="flow">

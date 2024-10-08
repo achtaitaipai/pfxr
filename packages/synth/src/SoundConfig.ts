@@ -1,6 +1,6 @@
-import { Parameters, Fx } from './types'
+import { Parameters, Sound } from './types'
 
-export const FX_SETTINGS = {
+export const SOUND_SETTINGS = {
 	waveForm: [
 		{
 			name: 'waveForm',
@@ -190,9 +190,9 @@ export const FX_SETTINGS = {
 	],
 } as const satisfies Parameters
 
-export const FIELDS = Object.values(FX_SETTINGS).flatMap((el) => [...el])
+export const FIELDS = Object.values(SOUND_SETTINGS).flatMap((el) => [...el])
 
-export const defaultFx = FIELDS.reduce(
+export const defaultSound = FIELDS.reduce(
 	(acc, el) => ({ ...acc, [el.name]: el.defaultValue }),
 	{},
-) as Fx
+) as Sound

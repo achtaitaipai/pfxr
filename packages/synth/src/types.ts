@@ -1,4 +1,4 @@
-import { FIELDS } from './FxConfig'
+import { FIELDS } from './SoundConfig'
 
 type Input =
 	| {
@@ -18,7 +18,7 @@ type Input =
 
 export type Parameters = Record<string, Input[]>
 
-export type Fx = Record<(typeof FIELDS)[number]['name'], number>
+export type Sound = Record<(typeof FIELDS)[number]['name'], number>
 
 export type SynthNode<T extends AudioNode, U extends AudioNode> = {
 	input: T

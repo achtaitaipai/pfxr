@@ -5,15 +5,15 @@
 		play,
 		selectHistoryItem,
 		updateUrl,
-		currentFx,
+		currentSound,
 		removeFromHistory,
 		historyCursor,
 	} from '../stores/history'
 
 	export const selectItem = (id: string) => {
 		selectHistoryItem(id)
-		play($currentFx)
-		updateUrl($currentFx)
+		play($currentSound)
+		updateUrl($currentSound)
 	}
 </script>
 
