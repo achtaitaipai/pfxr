@@ -1,6 +1,8 @@
 # 💨 Pfxr
 
-Pfxr is a lightweight JavaScript library inspired by DrPetter's iconic **sfxr** sound generator. It allows developers to easily create retro-style sound effects for games and applications directly in the browser using the powerful WebAudio API.
+Pfxr is a lightweight JavaScript library inspired by DrPetter's iconic **sfxr** sound generator. It allows developers to easily create retro-style sound effects for games and applications directly in the browser using the WebAudio API.
+
+You can also try out and experiment with sound effects using the **[Pfxr UI](https://achtaitaipai.github.io/pfxr/)**, which provides an intuitive interface for generating and tweaking sounds, and even sharing them via URL.
 
 ## Getting Started
 
@@ -15,12 +17,10 @@ Once installed, you can import and use the library in your JavaScript or TypeScr
 ```typescript
 import { playSound, getSoundFromTemplate, TEMPLATES } from 'pfxr'
 
-const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+const audioContext = new AudioContext()
 const sound = getSoundFromTemplate(TEMPLATES.laser)
 
-playSound(sound, audioContext, audioContext.destination).then(() => {
-	console.log('Sound played!')
-})
+playSound(sound, audioContext, audioContext.destination)
 ```
 
 ### Using Pfxr via CDN
@@ -36,9 +36,7 @@ If you prefer to use **Pfxr** directly in the browser without installing via npm
 	const audioContext = new AudioContext()
 	const sound = getSoundFromTemplate(TEMPLATES.laser)
 
-	playSound(sound, audioContext, audioContext.destination).then(() => {
-		console.log('Sound played!')
-	})
+	playSound(sound, audioContext, audioContext.destination)
 </script>
 ```
 
@@ -80,12 +78,12 @@ playSound(soundSettings, audioContext, audioContext.destination)
 
 ## `getSoundFromTemplate`
 
-The `getSoundFromTemplate` function generates a complete sound object based on a predefined sound template and an optional random seed. The function uses a template to structure the sound settings and introduces randomness for variety or uniqueness in the generated sound.
+The `getSoundFromTemplate` function generates a complete [sound](#sound) object based on a predefined sound template and an optional random seed. The function uses a template to structure the sound settings and introduces randomness for variety or uniqueness in the generated sound.
 
 ### Parameters
 
 - **`template: SoundTemplate`**  
-   A function representing a sound template. The template function defines the structure of the sound by specifying key sound parameters like waveform, pitch, envelope, and effects. You can choose from predefined templates (e.g., "laser," "explosion," etc.) or create your own.
+   A function representing a sound template. The template function defines the structure of the sound by specifying key sound parameters like waveform, pitch, envelope, and effects. You can choose from predefined templates (e.g., "default", "pickup", "laser", "jump", "fall", "powerup", "explosion", "blip", "hit", "fart", "random") or [create your own](#custom-template).
 
 - **`seed?: number`** _(Optional)_  
    A random seed value to control the random generation of the sound properties. This allows for reproducibility, meaning if you pass the same seed and template, the sound will always be generated the same way. If no seed is provided, the random generator will create a new, unpredictable sound.
@@ -117,7 +115,7 @@ The `getSoundFromUrl` function extracts sound parameters from a provided URL and
 #### Returns
 
 - **`Sound`**  
-   Returns a fully formed `Sound` object that includes all the necessary parameters (e.g., waveform, frequency, attack time, etc.) derived from the URL. The resulting sound object can be directly used in functions like `playSound` for playback or further customization.
+   Returns a fully formed [sound](#sound) object that includes all the necessary parameters (e.g., waveform, frequency, attack time, etc.) derived from the URL. The resulting sound object can be directly used in functions like `playSound` for playback or further customization.
 
 #### Usage
 
@@ -153,24 +151,52 @@ The `getUrlFromSound` function generates a URL from a given sound object, encodi
 
 In addition to the predefined templates, you can create your own custom sound templates to fit specific needs or generate unique sound effects. A custom template works by specifying the sound parameters you want to randomize or control, such as waveform, pitch, envelope, and effects.
 
-Here's an example of a custom template:
+The custom templates use a `rand` object, which provides various methods for generating random values. These methods help add variation and randomness to sound properties, making the sounds more dynamic and unpredictable.
+
+### `rand` Methods:
+
+- **`number(min?: number, max?: number)`**  
+   Generates a random floating-point number between `min` and `max`. If no arguments are provided, it returns a number between 0 and 1.  
+   Example:
+
+  ```typescript
+  rand.number(200, 800) // Returns a number between 200 and 800
+  ```
+
+- **`boolean(trueProbability?: number)`**  
+   Generates a random boolean (`true` or `false`). You can specify the probability of `true` with `trueProbability` (default is 0.5).  
+   Example:
+
+  ```typescript
+  rand.boolean(0.7) // 70% chance of returning true
+  ```
+
+- **`fromArray<T>(array: T[])`**  
+   Selects a random element from an array.  
+   Example:
+  ```typescript
+  rand.fromArray([1, 2, 3, 4]) // Randomly selects one of the array elements
+  ```
+
+Here's an example of a custom template that uses these methods to randomize the sound parameters:
 
 ### Example: Custom Template
 
 ```typescript
-import { playSound, getSoundFromTemplate, type SoundTemplate } from 'pfxr'
+import { playSound, createSoundFromTemplate, type SoundTemplate } from 'pfxr'
+
 const customTemplate: SoundTemplate = (rand) => ({
-	waveForm: 1,
-	frequency: rand.number(200, 800),
-	sustainTime: rand.number(0.2, 0.5),
-	decayTime: rand.number(0.3, 0.6),
-	pitchDelta: -rand.number(200, 500),
-	pitchDuration: 1,
-	pitchDelay: 0,
-	vibratoRate: rand.number(0, 10),
-	vibratoDepth: rand.number(0, 5),
-	lowPassCutoff: rand.number(1000, 3000),
-	lowPassResonance: rand.number(0, 10),
+	waveForm: rand.fromArray([0, 1, 2, 3]), // Randomly selects a waveform type
+	frequency: rand.number(200, 800), // Random frequency between 200 and 800 Hz
+	sustainTime: rand.number(0.2, 0.5), // Random sustain time between 0.2 and 0.5 seconds
+	decayTime: rand.number(0.3, 0.6), // Random decay time between 0.3 and 0.6 seconds
+	pitchDelta: -rand.number(200, 500), // Falling pitch over time
+	pitchDuration: 1, // Static pitch duration
+	pitchDelay: 0, // No pitch delay
+	vibratoRate: rand.number(0, 10), // Random vibrato rate
+	vibratoDepth: rand.number(0, 5), // Random vibrato depth
+	lowPassCutoff: rand.number(1000, 3000), // Random low-pass filter cutoff
+	lowPassResonance: rand.number(0, 10), // Random low-pass filter resonance
 })
 
 const sound = createSoundFromTemplate(customTemplate)
@@ -201,9 +227,11 @@ Here is a list of all the parameters included in the `Sound` type :
 ### Envelope
 
 2. **attackTime** (`range`)
+
    - Time for the sound to reach its peak after being triggered.
    - Range: `0` to `2` (seconds)
    - Default: `0`
+
 3. **sustainTime** (`range`)
 
    - Duration the sound sustains at peak level after the attack phase.
