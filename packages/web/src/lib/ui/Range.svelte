@@ -1,12 +1,11 @@
 <script lang="ts">
+	import { createSoundFromTemplate, TEMPLATES, type Sound } from 'pfxr'
 	import {
 		currentSound,
-		history,
 		historyCursor,
 		play,
 		updateHistoryItemParam,
 	} from '../stores/history'
-	import { createSoundFromTemplate, TEMPLATES, type Sound } from 'pfxr'
 	import { camelToTitle } from '../string'
 	import Button from './Button.svelte'
 
@@ -14,7 +13,7 @@
 	export let min: number
 	export let max: number
 	export let step: number
-	const defaultSound = createSoundFromTemplate(TEMPLATES.default)
+	const defaultSound = createSoundFromTemplate(TEMPLATES.DEFAULT)
 
 	$: label = camelToTitle(name) + ' ' + $currentSound[name]
 
