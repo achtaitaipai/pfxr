@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		currentSound,
-		history,
 		historyCursor,
 		updateHistoryItemParam,
 	} from '../stores/history'
