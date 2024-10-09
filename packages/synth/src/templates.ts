@@ -16,12 +16,14 @@ const roundSoundValues = (fx: Partial<Sound>): Sound => {
 
 export type SoundTemplate = (random: Random) => Partial<Sound>
 
-export const getSoundFromTemplate = (template: SoundTemplate, seed?: number) =>
-	roundSoundValues(template(new Random(seed)))
+export const createSoundFromTemplate = (
+	template: SoundTemplate,
+	seed?: number,
+) => roundSoundValues(template(new Random(seed)))
 
 export const TEMPLATES = {
-	default: () => ({}),
-	pickup: (rand) => ({
+	DEFAULT: () => ({}),
+	PICKUP: (rand) => ({
 		...(rand.boolean()
 			? {
 					pitchDelta: rand.number(100, 500),
@@ -35,7 +37,7 @@ export const TEMPLATES = {
 		decayTime: rand.number(0.1, 0.3),
 		frequency: rand.number(900, 1700),
 	}),
-	laser: (rand) => {
+	LASER: (rand) => {
 		const frequency = rand.number(100, 1300)
 		return {
 			waveForm: rand.fromArray([0, 1, 2, 3]),
@@ -48,7 +50,7 @@ export const TEMPLATES = {
 			pitchDelay: rand.fromArray([0, rand.number(0, 0.3)]),
 		}
 	},
-	jump: (rand) => ({
+	JUMP: (rand) => ({
 		waveForm: rand.fromArray([1, 2]),
 		sustainPunch: rand.number(0, 0.8),
 		sustainTime: rand.number(0.2, 0.5),
@@ -58,7 +60,7 @@ export const TEMPLATES = {
 		pitchDuration: 1,
 		pitchDelay: rand.fromArray([0, rand.number(0, 0.3)]),
 	}),
-	fall: (rand) => {
+	FALL: (rand) => {
 		const frequency = rand.number(80, 500)
 		return {
 			waveForm: rand.fromArray([1, 2, 3]),
@@ -75,7 +77,7 @@ export const TEMPLATES = {
 			tremoloDepth: rand.number(0, 1),
 		}
 	},
-	powerup: (rand) => ({
+	POWERUP: (rand) => ({
 		waveForm: rand.fromArray([0, 1, 2, 3]),
 		sustainPunch: rand.number(0, 1),
 		sustainTime: rand.number(0.2, 0.5),
@@ -87,7 +89,7 @@ export const TEMPLATES = {
 		vibratoRate: rand.number(10, 18),
 		vibratoDepth: rand.number(50, 100),
 	}),
-	explosion: (rand) => {
+	EXPLOSION: (rand) => {
 		const frequency = rand.number(200)
 		return {
 			waveForm: rand.fromArray([0, 1, 2, 3]),
@@ -106,13 +108,13 @@ export const TEMPLATES = {
 			noiseAmount: rand.number(300, 500),
 		}
 	},
-	blip: (rand) => ({
+	BLIP: (rand) => ({
 		waveForm: rand.fromArray([0, 1, 2, 3]),
 		sustainTime: rand.number(0.02, 0.1),
 		decayTime: rand.number(0, 0.04),
 		frequency: rand.number(600, 3000),
 	}),
-	hit: (rand) => {
+	HIT: (rand) => {
 		const frequency = rand.number(20, 500)
 		return {
 			waveForm: rand.fromArray([0, 1, 2, 3]),
@@ -124,7 +126,7 @@ export const TEMPLATES = {
 			noiseAmount: rand.number(100),
 		}
 	},
-	fart: (rand) => {
+	FART: (rand) => {
 		const frequency = rand.number(30, 150)
 		return {
 			waveForm: 1,
@@ -144,7 +146,7 @@ export const TEMPLATES = {
 			noiseAmount: rand.number(0, 30),
 		}
 	},
-	random: (rand) => {
+	RANDOM: (rand) => {
 		const params = { ...defaultSound } satisfies Sound
 		for (let index = 0; index < FIELDS.length; index++) {
 			const element = FIELDS[index]

@@ -15,10 +15,10 @@ npm install pfxr
 Once installed, you can import and use the library in your JavaScript or TypeScript project.
 
 ```typescript
-import { playSound, getSoundFromTemplate, TEMPLATES } from 'pfxr'
+import { playSound, createSoundFromTemplate, TEMPLATES } from 'pfxr'
 
 const audioContext = new AudioContext()
-const sound = getSoundFromTemplate(TEMPLATES.laser)
+const sound = createSoundFromTemplate(TEMPLATES.LASER)
 
 playSound(sound, audioContext, audioContext.destination)
 ```
@@ -31,10 +31,10 @@ If you prefer to use **Pfxr** directly in the browser without installing via npm
 <script src="https://unpkg.com/pfxr/dist/index.global.js"></script>
 
 <script>
-	const { playSound, getSoundFromTemplate, TEMPLATES } = pfxr
+	const { playSound, createSoundFromTemplate, TEMPLATES } = pfxr
 
 	const audioContext = new AudioContext()
-	const sound = getSoundFromTemplate(TEMPLATES.laser)
+	const sound = createSoundFromTemplate(TEMPLATES.LASER)
 
 	playSound(sound, audioContext, audioContext.destination)
 </script>
@@ -76,14 +76,14 @@ const soundSettings = {
 playSound(soundSettings, audioContext, audioContext.destination)
 ```
 
-## `getSoundFromTemplate`
+## `createSoundFromTemplate`
 
-The `getSoundFromTemplate` function generates a complete [sound](#sound) object based on a predefined sound template and an optional random seed. The function uses a template to structure the sound settings and introduces randomness for variety or uniqueness in the generated sound.
+The `createSoundFromTemplate` function generates a complete [sound](#sound) object based on a predefined sound template and an optional random seed. The function uses a template to structure the sound settings and introduces randomness for variety or uniqueness in the generated sound.
 
 ### Parameters
 
 - **`template: SoundTemplate`**  
-   A function representing a sound template. The template function defines the structure of the sound by specifying key sound parameters like waveform, pitch, envelope, and effects. You can choose from predefined templates (e.g., "default", "pickup", "laser", "jump", "fall", "powerup", "explosion", "blip", "hit", "fart", "random") or [create your own](#custom-template).
+   A function representing a sound template. The template function defines the structure of the sound by specifying key sound parameters like waveform, pitch, envelope, and effects. You can choose from predefined templates (e.g., "DEFAULT", "PICKUP", "LASER", "JUMP", "FALL", "POWERUP", "EXPLOSION", "BLIP", "HIT", "FART", "RANDOM") or [create your own](#custom-template).
 
 - **`seed?: number`** _(Optional)_  
    A random seed value to control the random generation of the sound properties. This allows for reproducibility, meaning if you pass the same seed and template, the sound will always be generated the same way. If no seed is provided, the random generator will create a new, unpredictable sound.
@@ -96,16 +96,16 @@ The `getSoundFromTemplate` function generates a complete [sound](#sound) object 
 ### Usage
 
 ```javascript
-import { playSound, TEMPLATES, getSoundFromTemplate } from 'pfxr'
-const sound = getSoundFromTemplate(TEMPLATES.laser, 999)
+import { playSound, TEMPLATES, createSoundFromTemplate } from 'pfxr'
+const sound = createSoundFromTemplate(TEMPLATES.LASER, 999)
 
 const audioContext = new AudioContext()
 playSound(sound, audioContext, audioContext.destination)
 ```
 
-## `getSoundFromUrl`
+## `createSoundFromUrl`
 
-The `getSoundFromUrl` function extracts sound parameters from a provided URL and returns a complete sound object. This allows users to share or load sounds via URLs that encapsulate all necessary sound settings.
+The `createSoundFromUrl` function extracts sound parameters from a provided URL and returns a complete sound object. This allows users to share or load sounds via URLs that encapsulate all necessary sound settings.
 
 ## Parameters
 
@@ -120,11 +120,11 @@ The `getSoundFromUrl` function extracts sound parameters from a provided URL and
 #### Usage
 
 ```javascript
-import { playSound, getSoundFromUrl } from 'pfxr'
+import { playSound, createSoundFromUrl } from 'pfxr'
 const url = new URL(
 	'https://achtaitaipai.github.io/pfxr/?fx=2,0,0.25,0,0.39,443,-443,1,0.12,12,11,10,0.61,0,0,4000,0,100,50,0,0',
 )
-const sound = getSoundFromUrl(url)
+const sound = createSoundFromUrl(url)
 
 const audioContext = new AudioContext()
 playSound(sound, audioContext, audioContext.destination)

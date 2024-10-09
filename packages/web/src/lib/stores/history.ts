@@ -1,4 +1,4 @@
-import { getSoundFromUrl, getUrlFromSound, playSound, type Sound } from 'pfxr'
+import { createSoundFromUrl, getUrlFromSound, playSound, type Sound } from 'pfxr'
 import { derived, writable } from 'svelte/store'
 
 type HistoryItem = {
@@ -8,7 +8,7 @@ type HistoryItem = {
 }
 
 export const history = writable<HistoryItem[]>([
-	{ id: '1', name: 'default 1', data: getSoundFromUrl(new URL(location.href)) },
+	{ id: '1', name: 'default 1', data: createSoundFromUrl(new URL(location.href)) },
 ])
 
 export const historyCursor = writable<string>('1')

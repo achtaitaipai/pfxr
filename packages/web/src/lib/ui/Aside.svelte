@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getSoundFromTemplate, TEMPLATES } from 'pfxr'
+	import { createSoundFromTemplate, TEMPLATES } from 'pfxr'
 	import { downloadSound } from '../download'
 	import { addToHistory, currentSound, play, updateUrl } from '../stores/history'
 	import { addToast } from '../stores/toasts'
@@ -9,7 +9,7 @@
 	const selectTemplate = (template: string) => {
 		if (!(template in TEMPLATES)) return
 		addToHistory(
-			getSoundFromTemplate(TEMPLATES[template as keyof typeof TEMPLATES]),
+			createSoundFromTemplate(TEMPLATES[template as keyof typeof TEMPLATES]),
 			template,
 		)
 		play($currentSound)

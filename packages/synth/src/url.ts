@@ -1,7 +1,7 @@
 import { defaultSound, FIELDS } from './SoundConfig'
 import { Sound } from './types'
 
-export const getSoundFromUrl = (url: URL): Sound => {
+export const createSoundFromUrl = (url: URL): Sound => {
 	const sound = { ...defaultSound }
 	const q = url.searchParams.get('fx')
 	if (!q) return sound
