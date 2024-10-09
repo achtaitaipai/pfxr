@@ -1,6 +1,6 @@
 {
 	"name": "pfxr",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "Pfxr is a lightweight JavaScript library for generating retro-style sound effects in the browser, inspired by sfxr and powered by the WebAudio API. Perfect for game developers and interactive projects.",
 	"author": "Achtzitaipai",
 	"main": "dist/index.js",
