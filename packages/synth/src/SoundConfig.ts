@@ -14,6 +14,16 @@ export const SOUND_SETTINGS = {
 			],
 		},
 	],
+	volume: [
+		{
+			name: 'volume',
+			min: 0,
+			max: 1,
+			step: 0.01,
+			type: 'range',
+			defaultValue: 0.5,
+		},
+	],
 	soundEnveloppe: [
 		{
 			name: 'attackTime',

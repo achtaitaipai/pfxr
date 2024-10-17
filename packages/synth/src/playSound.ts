@@ -8,6 +8,7 @@ import { createPhaser } from './Nodes/phaser'
 import { createTremolo } from './Nodes/tremolo'
 import { createVibrato } from './Nodes/vibrato'
 import type { Sound } from './types'
+import { createGain } from './Nodes/gain'
 
 export const playSound = (
 	partialSound: Partial<Sound>,
@@ -25,6 +26,7 @@ export const playSound = (
 	const lowPassFilter = createLowPassFilter(audioContext, fx)
 	const highPassFilter = createHighPassFilter(audioContext, fx)
 	const phaser = createPhaser(audioContext, fx)
+	const gainNode = createGain(audioContext, fx)
 
 	vibrato.output.connect(oscillator.input.frequency)
 	tremolo.output.connect(enveloppe.input)
@@ -33,11 +35,12 @@ export const playSound = (
 	phaser.output.connect(lowPassFilter.input)
 	lowPassFilter.output.connect(highPassFilter.input)
 	highPassFilter.output.connect(enveloppe.input)
+	enveloppe.output.connect(gainNode.input)
+	gainNode.output.connect(destination)
 
 	const nodes = [vibrato, tremolo, oscillator, phaser, lowPassFilter, enveloppe]
 
 	return new Promise<void>((res) => {
-		enveloppe.output.connect(destination)
 		nodes.forEach((node) => {
 			node.start?.()
 			node.stop?.(audioContext.currentTime + duration)
