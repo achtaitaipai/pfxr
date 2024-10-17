@@ -93,6 +93,7 @@ export const TEMPLATES = {
 		const frequency = rand.number(200)
 		return {
 			waveForm: rand.fromArray([0, 1, 2, 3]),
+			volume: 0.3,
 			sustainPunch: rand.number(0, 0.3),
 			sustainTime: rand.number(0.4, 1.3),
 			decayTime: rand.number(0.1, 0.5),
@@ -130,6 +131,7 @@ export const TEMPLATES = {
 		const frequency = rand.number(30, 150)
 		return {
 			waveForm: 1,
+			volume: 0.7,
 			sustainPunch: rand.number(0, 0.2),
 			sustainTime: rand.number(0.1, 0.5),
 			decayTime: rand.number(0.3, 0.5),
