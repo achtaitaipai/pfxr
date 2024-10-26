@@ -224,129 +224,137 @@ Here is a list of all the parameters included in the `Sound` type :
    - Options: `Sine (0)`, `SawTooth (1)`, `Square (2)`, `Triangle (3)`
    - Default: `0` (Sine)
 
+### Volume
+
+2. volume(range)
+   - Volume of the sound
+   - Range: 0 to 1
+   - Default: 0
+
 ### Envelope
 
-2. **attackTime** (`range`)
+3. **attackTime** (`range`)
 
    - Time for the sound to reach its peak after being triggered.
    - Range: `0` to `2` (seconds)
    - Default: `0`
 
-3. **sustainTime** (`range`)
+4. **sustainTime** (`range`)
 
    - Duration the sound sustains at peak level after the attack phase.
    - Range: `0` to `2` (seconds)
    - Default: `0.07`
 
-4. **sustainPunch** (`range`)
+5. **sustainPunch** (`range`)
 
    - Adds a "punch" to the sustained portion of the sound.
    - Range: `0` to `1`
    - Default: `0`
 
-5. **decayTime** (`range`)
+6. **decayTime** (`range`)
    - Time for the sound to fade after the sustain phase ends.
    - Range: `0` to `2` (seconds)
    - Default: `0.3`
 
 ### Pitch
 
-6. **frequency** (`range`)
+7. **frequency** (`range`)
 
    - Base frequency of the sound (pitch).
    - Range: `0` to `4000` (Hz)
    - Default: `700`
 
-7. **pitchDelta** (`range`)
+8. **pitchDelta** (`range`)
 
    - Change in frequency over time (positive for rising, negative for falling pitch).
    - Range: `-4000` to `4000`
    - Default: `0`
 
-8. **pitchDuration** (`range`)
+9. **pitchDuration** (`range`)
 
    - Duration of the pitch modulation.
    - Range: `0` to `1` (seconds)
    - Default: `1`
 
-9. **pitchDelay** (`range`)
-   - Delay before the pitch change starts.
-   - Range: `0` to `1` (seconds)
-   - Default: `0`
+10. **pitchDelay** (`range`)
+
+- Delay before the pitch change starts.
+- Range: `0` to `1` (seconds)
+- Default: `0`
 
 ### Vibrato
 
-10. **vibratoRate** (`range`)
+11. **vibratoRate** (`range`)
 
     - Speed of vibrato modulation (frequency modulation).
     - Range: `0` to `70`
     - Default: `0`
 
-11. **vibratoDepth** (`range`)
+12. **vibratoDepth** (`range`)
     - Intensity of the vibrato (depth of modulation).
     - Range: `0` to `100`
     - Default: `0`
 
 ### Tremolo
 
-12. **tremoloRate** (`range`)
+13. **tremoloRate** (`range`)
 
     - Speed of tremolo modulation (amplitude modulation).
     - Range: `0` to `70`
     - Default: `0`
 
-13. **tremoloDepth** (`range`)
+14. **tremoloDepth** (`range`)
     - Intensity of the tremolo effect.
     - Range: `0` to `1`
     - Default: `0`
 
 ### Filters
 
-14. **highPassCutoff** (`range`)
+15. **highPassCutoff** (`range`)
 
     - Frequency above which sound will pass (low frequencies are filtered out).
     - Range: `0` to `4000` (Hz)
     - Default: `0`
 
-15. **highPassResonance** (`range`)
+16. **highPassResonance** (`range`)
 
     - Resonance of the high-pass filter, affecting the emphasis around the cutoff frequency.
     - Range: `0` to `30`
     - Default: `0`
 
-16. **lowPassCutoff** (`range`)
+17. **lowPassCutoff** (`range`)
 
     - Frequency below which sound will pass (high frequencies are filtered out).
     - Range: `0` to `4000` (Hz)
     - Default: `4000`
 
-17. **lowPassResonance** (`range`)
+18. **lowPassResonance** (`range`)
     - Resonance of the low-pass filter, emphasizing frequencies around the cutoff.
     - Range: `0` to `30`
     - Default: `0`
 
 ### Phaser
 
-18. **phaserBaseFrequency** (`range`)
+19. **phaserBaseFrequency** (`range`)
 
     - Base frequency of the phaser effect, which modulates phase cancellation in the sound.
     - Range: `0` to `1000`
     - Default: `100`
 
-19. **phaserLfoFrequency** (`range`)
+20. **phaserLfoFrequency** (`range`)
 
     - Frequency of the low-frequency oscillator (LFO) controlling the phaser.
     - Range: `0` to `200`
     - Default: `50`
 
-20. **phaserDepth** (`range`)
+21. **phaserDepth** (`range`)
     - Depth of the phaser effect.
     - Range: `0` to `1000`
     - Default: `0`
 
 ### Noise
 
-21. noiseAmount (`range`)
+22. noiseAmount (`range`)
 
 - Amount of noise mixed into the sound, useful for effects like explosions or wind.
 - Range: `0` to `500` - Default: `0`
