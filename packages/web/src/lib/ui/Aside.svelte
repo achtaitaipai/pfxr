@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { createSoundFromTemplate, TEMPLATES } from 'pfxr'
 	import { downloadSound } from '../download'
-	import { addToHistory, currentSound, play, updateUrl } from '../stores/history'
+	import {
+		addToHistory,
+		currentSound,
+		play,
+		updateUrl,
+	} from '../stores/history'
 	import { addToast } from '../stores/toasts'
 	import Button from './Button.svelte'
 	import History from './History.svelte'
@@ -34,7 +39,7 @@
 	<section class="flow">
 		<div class="templates">
 			{#each Object.keys(TEMPLATES) as template}
-				<Button on:click={() => selectTemplate(template)}>{template}</Button>
+				<Button onclick={() => selectTemplate(template)}>{template}</Button>
 			{/each}
 		</div>
 	</section>
@@ -42,7 +47,7 @@
 		<History />
 	</section>
 	<section class="actions">
-		<Button on:click={copyLink} full>
+		<Button onclick={copyLink} full>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"
@@ -61,7 +66,7 @@
 			</svg>
 			Copy link</Button
 		>
-		<Button on:click={() => downloadSound($currentSound)} full>
+		<Button onclick={() => downloadSound($currentSound)} full>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"
@@ -78,7 +83,7 @@
 			</svg>
 			Download</Button
 		>
-		<Button on:click={() => play($currentSound)} solid full>
+		<Button onclick={() => play($currentSound)} solid full>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"

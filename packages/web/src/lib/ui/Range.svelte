@@ -10,18 +10,13 @@
 	import Button from './Button.svelte'
 
 	interface Props {
-		name: keyof Sound;
-		min: number;
-		max: number;
-		step: number;
+		name: keyof Sound
+		min: number
+		max: number
+		step: number
 	}
 
-	let {
-		name,
-		min,
-		max,
-		step
-	}: Props = $props();
+	let { name, min, max, step }: Props = $props()
 	const defaultSound = createSoundFromTemplate(TEMPLATES.DEFAULT)
 
 	let label = $derived(camelToTitle(name) + ' ' + $currentSound[name])
@@ -42,7 +37,7 @@
 <div>
 	<div class="label">
 		<label for={id}>{label}</label>
-		<Button on:click={reset} square>
+		<Button onclick={reset} square>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
