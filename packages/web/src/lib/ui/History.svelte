@@ -19,10 +19,14 @@
 <ul role="list">
 	{#each $history as item (item.id)}
 		<li class:current={item.id === $historyCursor}>
-			<button on:click={() => selectItem(item.id)} class="selectBtn"
+			<button onclick={() => selectItem(item.id)} class="selectBtn"
 				>{item.name}</button
 			>
-			<button on:click={() => removeFromHistory(item.id)} class="deleteBtn">
+			<button
+				onclick={() => removeFromHistory(item.id)}
+				class="deleteBtn"
+				aria-label="delete"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"

@@ -11,7 +11,7 @@
 	}
 </script>
 
-<form on:change={handleChange}>
+<form onchange={handleChange}>
 	{#each Object.entries(SOUND_SETTINGS) as [group, fields]}
 		<fieldset>
 			<h3>{camelToTitle(group)}</h3>

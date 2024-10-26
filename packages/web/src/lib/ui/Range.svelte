@@ -9,13 +9,22 @@
 	import { camelToTitle } from '../string'
 	import Button from './Button.svelte'
 
-	export let name: keyof Sound
-	export let min: number
-	export let max: number
-	export let step: number
+	interface Props {
+		name: keyof Sound;
+		min: number;
+		max: number;
+		step: number;
+	}
+
+	let {
+		name,
+		min,
+		max,
+		step
+	}: Props = $props();
 	const defaultSound = createSoundFromTemplate(TEMPLATES.DEFAULT)
 
-	$: label = camelToTitle(name) + ' ' + $currentSound[name]
+	let label = $derived(camelToTitle(name) + ' ' + $currentSound[name])
 
 	const id = crypto.randomUUID()
 
@@ -58,7 +67,7 @@
 		{max}
 		{step}
 		value={$currentSound[name]}
-		on:change={handleChange}
+		onchange={handleChange}
 	/>
 </div>
 

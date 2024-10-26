@@ -7,8 +7,12 @@
 	import type { Sound } from 'pfxr'
 	import { camelToTitle } from '../string'
 
-	export let options: { label: string; value: number }[]
-	export let name: keyof Sound
+	interface Props {
+		options: { label: string; value: number }[];
+		name: keyof Sound;
+	}
+
+	let { options, name }: Props = $props();
 	const handleChange = (e: Event) => {
 		const value = (e.currentTarget as HTMLInputElement).value
 		updateHistoryItemParam($historyCursor, name, Number(value))
@@ -18,7 +22,7 @@
 {#each options as { label, value }}
 	<label>
 		<input
-			on:change={handleChange}
+			onchange={handleChange}
 			type="radio"
 			{name}
 			{value}

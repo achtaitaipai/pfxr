@@ -1,11 +1,29 @@
 <script lang="ts">
-	export let solid = false
-	export let full = false
-	export let square = false
+	import { createBubbler } from 'svelte/legacy'
+
+	const bubble = createBubbler()
+
+	interface Props {
+		solid?: boolean
+		full?: boolean
+		square?: boolean
+		children?: import('svelte').Snippet
+	}
+
+	let {
+		solid = false,
+		full = false,
+		square = false,
+		children,
+	}: Props = $props()
 </script>
 
-<button on:click class:solid class:full class:square type="button"
-	><slot /></button
+<button
+	onclick={bubble('click')}
+	class:solid
+	class:full
+	class:square
+	type="button">{@render children?.()}</button
 >
 
 <style>
