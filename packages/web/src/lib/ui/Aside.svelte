@@ -1,32 +1,29 @@
 <script lang="ts">
 	import { createSoundFromTemplate, TEMPLATES } from 'pfxr'
 	import { downloadSound } from '../download'
-	import {
-		addToHistory,
-		currentSound,
-		play,
-		updateUrl,
-	} from '../stores/history'
-	import { addToast } from '../stores/toasts'
+	import { history } from '../stores/history.svelte'
+	import { play } from '../utils/playSound'
+	import { updateUrl } from '../utils/updateUrl'
+	import { toaster } from '../stores/toasts.svelte'
 	import Button from './Button.svelte'
 	import History from './History.svelte'
 
 	const selectTemplate = (template: string) => {
 		if (!(template in TEMPLATES)) return
-		addToHistory(
+		history.add(
 			createSoundFromTemplate(TEMPLATES[template as keyof typeof TEMPLATES]),
 			template,
 		)
-		play($currentSound)
-		updateUrl($currentSound)
+		play(history.currentSound)
+		updateUrl(history.currentSound)
 	}
 
 	const copyLink = async () => {
 		try {
 			await navigator.clipboard.writeText(location.href)
-			addToast('Copied to clipboard')
+			toaster.addToast('Copied to clipboard')
 		} catch (error) {
-			addToast('Something went wrong')
+			toaster.addToast('Something went wrong')
 		}
 	}
 </script>
@@ -66,7 +63,7 @@
 			</svg>
 			Copy link</Button
 		>
-		<Button onclick={() => downloadSound($currentSound)} full>
+		<Button onclick={() => downloadSound(history.currentSound)} full>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"
@@ -83,7 +80,7 @@
 			</svg>
 			Download</Button
 		>
-		<Button onclick={() => play($currentSound)} solid full>
+		<Button onclick={() => play(history.currentSound)} solid full>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"

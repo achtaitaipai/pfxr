@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
-	import { toasts } from '../stores/toasts'
+	import { toaster } from '../stores/toasts.svelte'
 </script>
 
 <ul role="list" class="flow">
-	{#each $toasts as toast (toast.id)}
+	{#each toaster.toasts as toast (toast.id)}
 		<li transition:fade>{toast.text}</li>
 	{/each}
 </ul>

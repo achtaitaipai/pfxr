@@ -1,29 +1,23 @@
 <script lang="ts">
-	import {
-		history,
-		play,
-		selectHistoryItem,
-		updateUrl,
-		currentSound,
-		removeFromHistory,
-		historyCursor,
-	} from '../stores/history'
+	import { history } from '../stores/history.svelte'
+	import { updateUrl } from '../utils/updateUrl'
+	import { play } from '../utils/playSound'
 
 	export const selectItem = (id: string) => {
-		selectHistoryItem(id)
-		play($currentSound)
-		updateUrl($currentSound)
+		history.select(id)
+		play(history.currentSound)
+		updateUrl(history.currentSound)
 	}
 </script>
 
 <ul role="list">
-	{#each $history as item (item.id)}
-		<li class:current={item.id === $historyCursor}>
+	{#each history.items as item (item.id)}
+		<li class:current={item.id === history.cursor}>
 			<button onclick={() => selectItem(item.id)} class="selectBtn"
 				>{item.name}</button
 			>
 			<button
-				onclick={() => removeFromHistory(item.id)}
+				onclick={() => history.remove(item.id)}
 				class="deleteBtn"
 				aria-label="delete"
 			>

@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { SOUND_SETTINGS } from 'pfxr'
-	import { currentSound, play, updateUrl } from '../stores/history'
+	import { history } from '../stores/history.svelte'
+	import { play } from '../utils/playSound'
+	import { updateUrl } from '../utils/updateUrl'
 	import { camelToTitle } from '../string'
 	import Radio from './Radio.svelte'
 	import Range from './Range.svelte'
 
 	const handleChange = () => {
-		play($currentSound)
-		updateUrl($currentSound)
+		play(history.currentSound)
+		updateUrl(history.currentSound)
 	}
 </script>
 

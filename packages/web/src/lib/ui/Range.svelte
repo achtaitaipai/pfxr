@@ -1,11 +1,7 @@
 <script lang="ts">
 	import { createSoundFromTemplate, TEMPLATES, type Sound } from 'pfxr'
-	import {
-		currentSound,
-		historyCursor,
-		play,
-		updateHistoryItemParam,
-	} from '../stores/history'
+	import { history } from '../stores/history.svelte'
+	import { play } from '../utils/playSound'
 	import { camelToTitle } from '../string'
 	import Button from './Button.svelte'
 
@@ -19,18 +15,18 @@
 	let { name, min, max, step }: Props = $props()
 	const defaultSound = createSoundFromTemplate(TEMPLATES.DEFAULT)
 
-	let label = $derived(camelToTitle(name) + ' ' + $currentSound[name])
+	let label = $derived(camelToTitle(name) + ' ' + history.currentSound[name])
 
 	const id = crypto.randomUUID()
 
 	const handleChange = (e: Event) => {
 		const value = (e.target as HTMLInputElement).valueAsNumber
-		updateHistoryItemParam($historyCursor, name, value)
+		history.updateItemParam(history.cursor, name, value)
 	}
 
 	const reset = () => {
-		updateHistoryItemParam($historyCursor, name, defaultSound[name])
-		play($currentSound)
+		history.updateItemParam(history.cursor, name, defaultSound[name])
+		play(history.currentSound)
 	}
 </script>
 
@@ -61,7 +57,7 @@
 		{min}
 		{max}
 		{step}
-		value={$currentSound[name]}
+		value={history.currentSound[name]}
 		onchange={handleChange}
 	/>
 </div>

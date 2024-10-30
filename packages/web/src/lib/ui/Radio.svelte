@@ -1,21 +1,17 @@
 <script lang="ts">
-	import {
-		currentSound,
-		historyCursor,
-		updateHistoryItemParam,
-	} from '../stores/history'
+	import { history } from '../stores/history.svelte'
 	import type { Sound } from 'pfxr'
 	import { camelToTitle } from '../string'
 
 	interface Props {
-		options: { label: string; value: number }[];
-		name: keyof Sound;
+		options: { label: string; value: number }[]
+		name: keyof Sound
 	}
 
-	let { options, name }: Props = $props();
+	let { options, name }: Props = $props()
 	const handleChange = (e: Event) => {
 		const value = (e.currentTarget as HTMLInputElement).value
-		updateHistoryItemParam($historyCursor, name, Number(value))
+		history.updateItemParam(history.cursor, name, Number(value))
 	}
 </script>
 
@@ -26,7 +22,7 @@
 			type="radio"
 			{name}
 			{value}
-			checked={Number(value) === $currentSound[name]}
+			checked={Number(value) === history.currentSound[name]}
 		/>
 		{camelToTitle(label)}
 	</label>
