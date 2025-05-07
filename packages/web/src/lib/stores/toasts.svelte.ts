@@ -9,7 +9,9 @@ class Toaster {
 	addToast(text: string) {
 		const id = crypto.randomUUID()
 		this.#toasts = [...this.#toasts, { id, text }]
-		setTimeout(() => this.#toasts.filter((el) => el.id !== id), 5000)
+		setTimeout(() => {
+			this.#toasts = this.#toasts.filter((el) => el.id !== id)
+		}, 5000)
 	}
 
 	get toasts() {
