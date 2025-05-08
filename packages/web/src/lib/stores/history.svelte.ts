@@ -37,17 +37,22 @@ class History {
 
 	add(fx: Sound, name: string) {
 		const id = crypto.randomUUID()
-		const suffix =
-			Math.max(
-				0,
-				...this.#items
-					.filter((el) => {
-						const reg = new RegExp(`^${name} \\d+$`)
-						return reg.test(el.name)
-					})
-					.map((el) => Number(el.name.match(/\d+/))),
-			) + 1
+		console.log(name)
+		const suffix = this.#getNameSuffix(name)
 		this.#items = [{ id, name: `${name} ${suffix}`, data: fx }, ...this.#items]
+		this.select(id)
+	}
+
+	duplicate(itemId: string) {
+		const item = this.#items.find((el) => el.id === itemId)
+		if (!item) return
+		const name = item.name.replace(/\d+$/, '').trim()
+		const id = crypto.randomUUID()
+		const suffix = this.#getNameSuffix(name)
+		this.#items = [
+			{ id, name: `${name} ${suffix}`, data: { ...item.data } },
+			...this.#items,
+		]
 		this.select(id)
 	}
 
@@ -72,6 +77,20 @@ class History {
 
 	select(id: string) {
 		this.#cursor = id
+	}
+
+	#getNameSuffix(name: string) {
+		return (
+			Math.max(
+				0,
+				...this.#items
+					.filter((el) => {
+						const reg = new RegExp(`^${name} \\d+$`)
+						return reg.test(el.name)
+					})
+					.map((el) => Number(el.name.match(/\d+/))),
+			) + 1
+		)
 	}
 }
 
