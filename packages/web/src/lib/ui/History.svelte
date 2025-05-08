@@ -21,6 +21,7 @@
 					class="copyBtn"
 					onclick={() => history.duplicate(item.id)}
 					aria-label="duplicate"
+					title="duplicate"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +43,7 @@
 					onclick={() => history.remove(item.id)}
 					class="deleteBtn"
 					aria-label="delete"
+					title="delete"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

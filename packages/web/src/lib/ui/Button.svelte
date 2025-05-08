@@ -5,6 +5,7 @@
 		square?: boolean
 		onclick?: (e: MouseEvent) => void
 		children?: import('svelte').Snippet
+		title?: string
 	}
 
 	let {
@@ -12,11 +13,12 @@
 		full = false,
 		square = false,
 		onclick,
+		title,
 		children,
 	}: Props = $props()
 </script>
 
-<button {onclick} class:solid class:full class:square type="button"
+<button {onclick} class:solid class:full class:square type="button" {title}
 	>{@render children?.()}</button
 >
 
