@@ -37,7 +37,6 @@ class History {
 
 	add(fx: Sound, name: string) {
 		const id = crypto.randomUUID()
-		console.log(name)
 		const suffix = this.#getNameSuffix(name)
 		this.#items = [{ id, name: `${name} ${suffix}`, data: fx }, ...this.#items]
 		this.select(id)
