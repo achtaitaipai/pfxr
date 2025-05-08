@@ -1,4 +1,5 @@
 import { createSoundFromUrl, type Sound } from 'pfxr'
+import { createSubscriber } from 'svelte/reactivity'
 
 type HistoryItem = {
 	id: string
@@ -9,9 +10,14 @@ type HistoryItem = {
 class History {
 	#items: HistoryItem[] = $state([])
 	#cursor = $state('1')
-	#currentSound = $derived(
-		this.#items.find((el) => el.id === this.#cursor)!.data,
-	)
+
+	#currentSoundSub = createSubscriber((update) => {
+		$effect(() => {
+			this.#items
+			this.#cursor
+			update()
+		})
+	})
 
 	get items() {
 		return this.#items
@@ -22,7 +28,8 @@ class History {
 	}
 
 	get currentSound() {
-		return this.#currentSound
+		this.#currentSoundSub()
+		return this.#items.find((el) => el.id === this.#cursor)!.data
 	}
 
 	constructor() {
